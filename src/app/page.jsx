@@ -20,5 +20,28 @@ export default function Home() {
     todaysDate
   );
 
-  return <main></main>;
+  return (
+    <main>
+      <h1>
+        <em>Dear Dairy</em>
+      </h1>
+      <div id="month">
+        <button>◀</button>
+        <p>Month</p>
+        <button>▶</button>
+      </div>
+      <div id="year">
+        <button>◀</button>
+        <p>Year</p>
+        <button>▶</button>
+      </div>
+
+      <div id="days-container"></div>
+
+      <form>
+        <textarea></textarea>
+        <button id="submitBtn">Submit</button>
+      </form>
+    </main>
+  );
 }
