@@ -9,8 +9,16 @@ export default function Home() {
   let currentDay = currentDate.getDate();
   let currentMonth = currentDate.getMonth() + 1;
   let currentYear = currentDate.getFullYear();
-
-  console.log(currentDate, currentDay, currentMonth, currentYear);
+  let presentDate = currentDate.toJSON().slice(0, 10);
+  let todaysDate = currentDate.toLocaleDateString();
+  console.log(
+    currentDate,
+    currentDay,
+    currentMonth,
+    currentYear,
+    presentDate,
+    todaysDate
+  );
 
   return <main></main>;
 }
