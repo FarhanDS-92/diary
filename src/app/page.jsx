@@ -78,7 +78,37 @@ export default function Home() {
       e.target.className = "card selected-day";
     }
 
-    console.log(e);
+    setChosenDay(Number(e.target.textContent));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    let entry = {
+      day: chosenDay,
+      month: chosenMonth[monthCounter],
+      year: Number(chosenYear),
+      text: e.target[0].value,
+    };
+
+    let entryExists = false;
+    let updatedEntries = entries.map((existingEntry) => {
+      if (
+        existingEntry.day === entry.day &&
+        existingEntry.month === entry.month &&
+        existingEntry.year === entry.year
+      ) {
+        entryExists = true;
+        return { ...existingEntry, text: entry.text };
+      }
+      return existingEntry;
+    });
+
+    if (!entryExists) {
+      updatedEntries.push(entry);
+    }
+
+    setEntries(updatedEntries);
   }
 
   return (
@@ -145,7 +175,7 @@ export default function Home() {
           })}
       </div>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <textarea></textarea>
         <button id="submitBtn">Submit</button>
       </form>
