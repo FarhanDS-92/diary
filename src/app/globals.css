@@ -125,10 +125,23 @@ textarea:hover {
   outline: none;
 }
 
+#btns {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
 
 #submitBtn {
   height: 40px;
   width: 80px;
+  font-size: 1em;
+}
+
+#deleteBtn {
+  height: 40px;
+  width: 120px;
   font-size: 1em;
 }
 

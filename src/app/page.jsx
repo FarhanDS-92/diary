@@ -15,6 +15,9 @@ export default function Home() {
 
   const [clickedOn, setClickedOn] = useState(false);
   const [entries, setEntries] = useState([]);
+  const [showEntry, setShowEntry] = useState("");
+
+  const [envelope, setEnvelope] = useState("💌");
 
   const validate = validator({ format: "YYYY-MM-DD" });
 
@@ -62,6 +65,7 @@ export default function Home() {
 
   function handleChosenDay(e) {
     setChosenYear(chosenYear.toString());
+    setShowEntry("");
 
     if (clickedOn === false) {
       e.target.className = "card selected-day";
@@ -74,11 +78,31 @@ export default function Home() {
           e.target.parentElement.children[i].className = "card";
         }
       }
-
       e.target.className = "card selected-day";
     }
 
-    setChosenDay(Number(e.target.textContent));
+    let thatDay = "";
+
+    // console.log(e.target.textContent.includes("💌"));
+    // console.log(e.target.textContent.split(""));
+
+    if (e.target.textContent.includes("💌")) {
+      thatDay = e.target.textContent.slice(2);
+      console.log(thatDay);
+      setChosenDay(Number(thatDay));
+    } else {
+      setChosenDay(Number(e.target.textContent));
+    }
+
+    for (let i = 0; i < entries.length; i++) {
+      if (
+        entries[i].day === Number(thatDay) &&
+        entries[i].month === chosenMonth[monthCounter] &&
+        entries[i].year === Number(chosenYear)
+      ) {
+        setShowEntry(entries[i].text);
+      }
+    }
   }
 
   function handleSubmit(e) {
@@ -92,6 +116,38 @@ export default function Home() {
     };
 
     let entryExists = false;
+
+    let updatedEntries = entries.map((existingEntry) => {
+      if (
+        existingEntry.day === entry.day &&
+        existingEntry.month === entry.month &&
+        existingEntry.year === entry.year
+      ) {
+        entryExists = true;
+        return { ...existingEntry, text: entry.text };
+      }
+      return existingEntry;
+    });
+
+    if (!entryExists) {
+      updatedEntries.push(entry);
+    }
+
+    setEntries(updatedEntries);
+  }
+
+  function handleDelete() {
+    setShowEntry("");
+
+    let entry = {
+      day: chosenDay,
+      month: chosenMonth[monthCounter],
+      year: Number(chosenYear),
+      text: null,
+    };
+
+    let entryExists = false;
+
     let updatedEntries = entries.map((existingEntry) => {
       if (
         existingEntry.day === entry.day &&
@@ -168,7 +224,15 @@ export default function Home() {
                     : null
                 }
               >
-                {day.envelope}
+                {entries.some(
+                  (object) =>
+                    object.day === Number(day.day) &&
+                    object.month === chosenMonth[monthCounter] &&
+                    object.year === Number(chosenYear) &&
+                    object.text !== null
+                )
+                  ? envelope
+                  : null}
                 {day.day}
               </div>
             );
@@ -176,8 +240,18 @@ export default function Home() {
       </div>
 
       <form onSubmit={handleSubmit}>
-        <textarea></textarea>
-        <button id="submitBtn">Submit</button>
+        <textarea
+          onChange={(e) => setShowEntry(e.target.value)}
+          value={showEntry}
+        ></textarea>
+        <div id="btns">
+          <button id="submitBtn">Submit</button>
+          {showEntry ? (
+            <button id="deleteBtn" type="button" onClick={handleDelete}>
+              Delete Entry
+            </button>
+          ) : null}
+        </div>
       </form>
     </main>
   );
