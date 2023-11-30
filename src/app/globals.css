@@ -2,19 +2,21 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  color: #132A13;
 }
 
 body {
   width: 100%;
   height: 100vh;
-  background-color: aquamarine;
+  background-image: url('/background.jpg');
+  background-size: auto;
+  background-repeat: no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 main {
-  background-color: antiquewhite;
   width: 90%;
   height: 90%;
   display: flex;
@@ -39,8 +41,22 @@ h1 {
 }
 
 button {
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
+  border-radius: 10px;
+  background-color: #132A13;
+  border: none;
+  color: #ECF39E;
+  font-weight: 700;
+  transition: 0.5s ease-out;
+}
+
+button:focus,
+button:hover {
+  border: none;
+  background-color: #ECF39E;
+  color: #132A13;
+  outline: none;
 }
 
 #year {
@@ -59,7 +75,8 @@ button {
   margin-top: 30px;
   height: 40%;
   width: 80%;
-  background-color: red;
+  background-color: #31572c81;
+  border-radius: 30px;
   margin-bottom: 20px;
 }
 
@@ -75,11 +92,26 @@ form {
 textarea {
   height: 78%;
   width: 100%;
+  padding: 20px;
+  border: none;
+  color: #ECF39E;
+  font-size: 20px;
   margin-bottom: 10px;
   border-radius: 20px;
+  background-color: #31572c81;
+  transition: 0.5s ease-in-out;
 }
 
+textarea:focus,
+textarea:hover {
+  color: #132A13;
+  background-color: #ECF39E;
+  outline: none;
+}
+
+
 #submitBtn {
-  height: 20%;
-  width: 5%;
+  height: 40px;
+  width: 80px;
+  font-size: 1em;
 }

@@ -1,29 +1,21 @@
 "use client";
 import validator from "is-my-date-valid";
+import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
+import days from "@/lib/days.jsx";
 
 export default function Home() {
-  const [presentDay, setPresentDay] = useState("");
+  const [arrayDays, setArrayDays] = useState(days);
+  const [chosenDay, setChosenDay] = useState("");
+  const [chosenMonth, setChosenMonth] = useState("");
+  const [chosenYear, setChosenYear] = useState("");
 
-  const currentDate = new Date();
-  let currentDay = currentDate.getDate();
-  let currentMonth = currentDate.getMonth() + 1;
-  let currentYear = currentDate.getFullYear();
-  let presentDate = currentDate.toJSON().slice(0, 10);
-  let todaysDate = currentDate.toLocaleDateString();
-  console.log(
-    currentDate,
-    currentDay,
-    currentMonth,
-    currentYear,
-    presentDate,
-    todaysDate
-  );
+  console.log(arrayDays);
 
   return (
     <main>
       <h1>
-        <em>Dear Dairy</em>
+        <em>Dear Diary</em>
       </h1>
       <div id="month">
         <button>◀</button>
