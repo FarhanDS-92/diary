@@ -12,6 +12,9 @@ export default function Home() {
   const [monthCounter, setMonthCounter] = useState(0);
   const [realMonth, setRealMonth] = useState(0);
   const [chosenYear, setChosenYear] = useState(0);
+  const [entries, setEntries] = useState([]);
+
+  const validate = validator({ format: "YYYY-MM-DD" });
 
   const currentDate = new Date();
   const currentDay = currentDate.getDate();
@@ -76,13 +79,26 @@ export default function Home() {
       </div>
 
       <div id="days-container">
-        {arrayDays.map((day) => {
-          return (
-            <div className="card" key={day.id}>
-              {day.day}
-            </div>
-          );
-        })}
+        {arrayDays
+          .filter((day) => {
+            return validate(
+              `${chosenYear}-${
+                realMonth < 10
+                  ? `0${realMonth}`
+                  : realMonth >= 10
+                  ? `${realMonth}`
+                  : ""
+              }-${day.day}`
+            );
+          })
+          .map((day) => {
+            return (
+              <div className="card" key={day.id}>
+                {day.heart}
+                {day.day}
+              </div>
+            );
+          })}
       </div>
 
       <form>

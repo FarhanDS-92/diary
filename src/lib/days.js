@@ -5,7 +5,14 @@ const days = [];
 for (let i = 1; i < 32; i++) {
   let object = {};
   object.id = uuidv4();
-  object.day = i;
+
+  if (i < 10) {
+    let stringI = `0${i}`;
+    object.day = stringI;
+  } else {
+    object.day = i;
+  }
+
   days.push(object);
 }
 
