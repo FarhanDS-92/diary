@@ -12,6 +12,8 @@ export default function Home() {
   const [monthCounter, setMonthCounter] = useState(0);
   const [realMonth, setRealMonth] = useState(0);
   const [chosenYear, setChosenYear] = useState(0);
+
+  const [clickedOn, setClickedOn] = useState(false);
   const [entries, setEntries] = useState([]);
 
   const validate = validator({ format: "YYYY-MM-DD" });
@@ -41,11 +43,42 @@ export default function Home() {
   }
 
   function handlePrevYear() {
-    setChosenYear(chosenYear - 1);
+    if (typeof chosenYear === "number") {
+      setChosenYear(chosenYear - 1);
+    } else if (typeof chosenYear === "string") {
+      let year = Number(chosenYear) - 1;
+      setChosenYear(year.toString());
+    }
   }
 
   function handleNextYear() {
-    setChosenYear(chosenYear + 1);
+    if (typeof chosenYear === "number") {
+      setChosenYear(chosenYear + 1);
+    } else if (typeof chosenYear === "string") {
+      let year = Number(chosenYear) + 1;
+      setChosenYear(year.toString());
+    }
+  }
+
+  function handleChosenDay(e) {
+    setChosenYear(chosenYear.toString());
+
+    if (clickedOn === false) {
+      e.target.className = "card selected-day";
+      setClickedOn(true);
+    } else {
+      let parent = [...e.target.parentElement.children];
+
+      for (let i = 0; i < parent.length; i++) {
+        if (parent[i].className === "card selected-day") {
+          e.target.parentElement.children[i].className = "card";
+        }
+      }
+
+      e.target.className = "card selected-day";
+    }
+
+    console.log(e);
   }
 
   return (
@@ -93,8 +126,19 @@ export default function Home() {
           })
           .map((day) => {
             return (
-              <div className="card" key={day.id}>
-                {day.heart}
+              <div
+                onClick={handleChosenDay}
+                className="card"
+                key={day.id}
+                id={
+                  chosenMonth[monthCounter] === chosenMonth[currentMonth] &&
+                  chosenYear === currentYear &&
+                  Number(day.day) === currentDay
+                    ? "highlight"
+                    : null
+                }
+              >
+                {day.envelope}
                 {day.day}
               </div>
             );
