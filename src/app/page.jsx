@@ -108,32 +108,34 @@ export default function Home() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    let entry = {
-      day: chosenDay,
-      month: chosenMonth[monthCounter],
-      year: Number(chosenYear),
-      text: e.target[0].value,
-    };
+    if (e.target[0].value) {
+      let entry = {
+        day: chosenDay,
+        month: chosenMonth[monthCounter],
+        year: Number(chosenYear),
+        text: e.target[0].value,
+      };
 
-    let entryExists = false;
+      let entryExists = false;
 
-    let updatedEntries = entries.map((existingEntry) => {
-      if (
-        existingEntry.day === entry.day &&
-        existingEntry.month === entry.month &&
-        existingEntry.year === entry.year
-      ) {
-        entryExists = true;
-        return { ...existingEntry, text: entry.text };
+      let updatedEntries = entries.map((existingEntry) => {
+        if (
+          existingEntry.day === entry.day &&
+          existingEntry.month === entry.month &&
+          existingEntry.year === entry.year
+        ) {
+          entryExists = true;
+          return { ...existingEntry, text: entry.text };
+        }
+        return existingEntry;
+      });
+
+      if (!entryExists) {
+        updatedEntries.push(entry);
       }
-      return existingEntry;
-    });
 
-    if (!entryExists) {
-      updatedEntries.push(entry);
+      setEntries(updatedEntries);
     }
-
-    setEntries(updatedEntries);
   }
 
   function handleDelete() {
