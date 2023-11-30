@@ -83,9 +83,6 @@ export default function Home() {
 
     let thatDay = "";
 
-    // console.log(e.target.textContent.includes("💌"));
-    // console.log(e.target.textContent.split(""));
-
     if (e.target.textContent.includes("💌")) {
       thatDay = e.target.textContent.slice(2);
       console.log(thatDay);
