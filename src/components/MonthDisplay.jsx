@@ -7,7 +7,7 @@ export default function MonthDisplay({
   setRealMonth,
   chosenMonth,
 }) {
-  // as with both functions, did a minus or plus, setting the MonthCounter (valued at 0-11) and Real Month (valued at 1-12) in order to either use for displaying the month, or used to validate the date
+  // as with both functions, did a minus or plus, setting the MonthCounter (valued at 0-11) and Real Month (valued at 1-12) in order to either use for displaying the month, or used to validate the date - this is updating state for the month also to keep track
   function handlePrevMonth() {
     let prevMonth = monthCounter - 1;
     setMonthCounter(prevMonth);
