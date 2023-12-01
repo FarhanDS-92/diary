@@ -10,6 +10,8 @@ export default function FormDisplay({
   monthCounter,
   chosenYear,
 }) {
+  // prevent default to prevent refresh when submitted --- function essentially takes user entry in the textarea and stores it in the state array of objects called entries --- this object will contain the day month year and text --- this function also allows for user to edit the text entry that they have inputted before
+  // I created a separate array first and manipulate and check that using a map and if statement --- whereby I check the entries array of object state --- ofc a separate variable is also made to be false --- that way if the entries array of object does not contain an entry for the chosen day month and year it just adds it as regular --- but if it does contain an existing object that matches with the chosen day month and year then the text will be edited
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -43,6 +45,7 @@ export default function FormDisplay({
     }
   }
 
+  // this uses the same logic as before except with delete the value in the key-value pair for text to null
   function handleDelete() {
     setShowEntry("");
 
@@ -75,6 +78,7 @@ export default function FormDisplay({
   }
 
   return (
+    // delete button is conditionally rendered if the value of the text area is truthy
     <form onSubmit={handleSubmit}>
       <textarea
         onChange={(e) => setShowEntry(e.target.value)}

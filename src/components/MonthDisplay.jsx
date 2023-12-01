@@ -7,6 +7,7 @@ export default function MonthDisplay({
   setRealMonth,
   chosenMonth,
 }) {
+  // as with both functions, did a minus or plus, setting the MonthCounter (valued at 0-11) and Real Month (valued at 1-12) in order to either use for displaying the month, or used to validate the date
   function handlePrevMonth() {
     let prevMonth = monthCounter - 1;
     setMonthCounter(prevMonth);
@@ -20,6 +21,7 @@ export default function MonthDisplay({
   }
 
   return (
+    // on Click event and thereby dynamically updating state with function, className and disabled are in a turnery using a state so that they both are also dynamically rendered where by we cannot press the button anymore if reached a certain condition
     <div id="month">
       <button
         onClick={handlePrevMonth}
