@@ -1,3 +1,5 @@
+// just an array containing the months throughout the year
+
 const months = [
   "January",
   "February",
