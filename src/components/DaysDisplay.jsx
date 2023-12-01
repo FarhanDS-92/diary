@@ -18,7 +18,7 @@ export default function DaysDisplay({
   validate,
   setChosenDay,
 }) {
-  // this function is set to every div of day that is rendered from the daysArray, so on click event
+  // this function is set to every div of day that is rendered from the daysArray, so on click event, also updating state to track the day chosen
   function handleChosenDay(e) {
     // by setting the year to a string we stop the id highlight on the current date, as its dynamically changed through a turnery checking the day, month and year strictly --- so by changing it to a string it won't be highlight except for the day the user clicked on
     setChosenYear(chosenYear.toString());
