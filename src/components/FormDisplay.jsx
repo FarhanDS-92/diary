@@ -24,7 +24,7 @@ export default function FormDisplay({
       };
 
       let entryExists = false;
-
+      //
       let updatedEntries = entries.map((existingEntry) => {
         if (
           existingEntry.day === entry.day &&
