@@ -47,7 +47,6 @@ export default function DaysDisplay({
     // if statement to update the chosenDay which is kept track to know which day was clicked on, if statement is used to check if textContent contains envelope and thereby needs to be sliced otherwise just changed to a number
     if (e.target.textContent.includes("💌")) {
       thatDay = e.target.textContent.slice(2);
-      console.log(thatDay);
       setChosenDay(Number(thatDay));
     } else {
       setChosenDay(Number(e.target.textContent));
